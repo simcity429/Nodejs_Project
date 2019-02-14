@@ -1,0 +1,57 @@
+extends layout
+
+block content
+  
+  
+    h2 의뢰 세부사항
+    strong 의뢰명
+    p #{quest.qname}
+    strong 의뢰주
+    p #{quest.uid}
+    strong 의뢰자 평균 평점
+    p #{clientgrade}
+    strong 보수
+    p #{quest.qcost}
+    strong 의뢰시작시간
+    p #{moment(quest.dstartdate).format('MM/DD/YYYY')}
+    strong 의뢰종료시간
+    p #{moment(quest.dfinishdate).format('MM/DD/YYYY')}
+    strong 개발시작시간
+    if(quest.pstartdate)
+      p #{moment(quest.pstartdate).format('MM/DD/YYYY')}
+    else
+      p Yet
+    strong 개발종료시간
+    if(quest.pfinishdate)
+      p #{moment(quest.pfinishdate).format('MM/DD/YYYY')}
+    else
+      p Yet
+    strong 최소필요경력
+    p #{quest.min_career}
+    strong 최소필요인원
+    p #{quest.min_freenum}
+    strong 최대가능인원
+    p #{quest.max_freenum}
+    strong PYTHON 요구수준
+    p #{quest.python}
+    strong JAVA 요구수준
+    p #{quest.java}
+    strong C 요구수준
+    p #{quest.c}
+    strong PHP 요구수준
+    p #{quest.php}
+    strong nodeJS 요구수준
+    p #{quest.nodejs}
+    strong QUEST Document
+    table(style='width:100%' border='1')
+        tr
+            th filename
+            th download
+        each p in questdocument
+            tr
+                th #{p.filename}
+                th
+                    form(action='/freelancerquest/download_quest' method='get')
+                        input(type='hidden' name='filename' value=p.filename)
+                        input(type='submit' value='download')
+    

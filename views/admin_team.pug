@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 Team Management Page
+    h2 Team List
+    table(style='width:100%', border='1')
+        tr
+            th Team Name
+            th Leader uid
+            th pid
+            th Advanced
+        each team in data
+            tr
+                th #{team.tname}
+                th #{team.leader}
+                th #{team.pid}
+                th
+                    form(action='/admin/team_advancedmanage')
+                        input(type='hidden' name='leader' value=team.leader)
+                        input(type='hidden' name='tname' value=team.tname)
+                        input(type='hidden' name='pid' value=team.pid)
+                        input(type='submit' value='Go!')
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

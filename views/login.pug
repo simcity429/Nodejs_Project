@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    h1 Welcome to SuperCrack!
+    h2 Log in
+    form(action='/result', method='post')
+        p id
+        p
+            input(type='text' name='id')
+        p password
+        p
+            input(type='password' name='pw')
+        p
+            input(type='submit' name='submit' value='log in')
+    p --------------------------------------------------------
+    h2 sign up as freelancer
+    form(action='/signup_freelancer_pg', method='get')
+        p
+            input(type='submit' value='sign up')
+    h2 sign up as client
+    form(action='/signup_client_pg', method='get')
+        p
+            input(type='submit' value='sign up')

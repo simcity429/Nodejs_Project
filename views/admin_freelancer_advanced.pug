@@ -1,0 +1,92 @@
+extends layout
+
+block content
+    - var uid = freelancer.uid
+    h1 Advanced manage page for Freelancer #{uid}
+    h2 Modify basic information of Freelancer #{uid}
+    p ---------------------------------------------------------------------------
+    form(action='/admin/freelancer_domodify')
+        p name
+            input(type='text' value=freelancer.name name='name' required)
+        p phone
+            input(type='text' value=freelancer.phone name='phone' required)
+        p grade
+            input(type='text' value=freelancer.grade name='grade' required)
+        p age
+            input(type='text' value=freelancer.age name='age' required)
+        p career
+            input(type='text' value=freelancer.career name='career' required)
+        p major
+            input(type='text' value=freelancer.major name='major' required)
+        p python
+            input(type='text' value=freelancer.python name='python' required)
+        p java
+            input(type='text' value=freelancer.java name='java' required)
+        p c
+            input(type='text' value=freelancer.c name='c' required)
+        p php
+            input(type='text' value=freelancer.php name='php' required)
+        p nodejs
+            input(type='text' value=freelancer.nodejs name='nodejs' required)
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=0)
+        input(type='submit' value='modify')
+    p ---------------------------------------------------------------------------
+    h2 #{uid}'s Internal Portfolio
+    table(style='width:100%' border='1')
+        tr
+            th user ID
+            th participant ID
+            th quest ID
+            th grade
+        each p in pi
+            tr
+                th #{p.uid}
+                th #{p.pid}
+                th #{p.qid}
+                th #{p.grade}
+    p ---------------------------------------------------------------------------
+    h2 #{uid}'s External Portfolio
+    table(style='width:100%' border='1')
+        tr
+            th uid
+            th portid
+            th filename
+            th development_info
+            th download
+            th delete
+        each p in pe
+            tr
+                th #{p.uid}
+                th #{p.portid}
+                th #{p.filename}
+                th #{p.development_info}
+                th
+                    form(action='/admin/freelancer_downExternal' method='get')
+                        input(type='hidden' name='filename' value=p.filename)
+                        input(type='submit' value='download')
+                th
+                    form(action='/admin/freelancer_dropExternal' method='get')
+                        input(type='hidden' name='portid' value=p.portid)
+                        input(type='hidden' name='uid' value=freelancer.uid)
+                        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    h2 ADD EXTERNAL
+    form(action='/admin/external_update' method='post' enctype='multipart/form-data')
+        input(type='hidden' name='uid' value=uid)
+        input(type='file' name='file')
+        p Development Information
+        p
+            input(type='text' name='development_info' autocomplete='off')
+        p
+            input(type='submit')
+    p ---------------------------------------------------------------------------
+    h2 Delete the Freelancer #{uid}
+    form(action='/admin/freelancer_domodify')
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=1)
+        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

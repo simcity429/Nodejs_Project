@@ -1,0 +1,45 @@
+extends layout
+
+block content
+    - var tname = member[0].tname
+    h1 Advanced manage page for Team #{tname}
+    h2 Member List
+    table(style='width:100%' border='1')
+        tr
+            th uid
+            th delete
+        each m in member
+            tr
+                th #{m.uid}
+                th
+                    form(action='/admin/team_dropmember')
+                        input(type='hidden' name='tname' value=tname)
+                        input(type='hidden' name='canbemodify' value=canbemodify)
+                        input(type='hidden' name='leader' value=leader)
+                        input(type='hidden' name='uid' value=m.uid)
+                        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    h2 Add Member
+    form(action='/admin/team_addmember')
+        p uid
+        input(type='text' name='uid')
+        input(type='hidden' name='tname' value=tname)
+        input(type='hidden' name='canbemodify' value=canbemodify)
+        input(type='submit' value='add')
+    p ---------------------------------------------------------------------------
+    h2 Change Leader
+    form(action='/admin/team_changeleader')
+        p uid
+        input(type='text' name='uid')
+        input(type='hidden' name='tname' value=tname)
+        input(type='hidden' name='canbemodify' value=canbemodify)
+        input(type='submit' value='add')
+    p ---------------------------------------------------------------------------
+    h2 Delete the Team #{tname}
+    form(action='/admin/team_delete')
+        input(type='hidden' name='tname' value=tname)
+        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

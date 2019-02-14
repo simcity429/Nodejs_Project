@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    - var uid = client.uid
+    h1 Advanced manage page for Client #{uid}
+    h2 Modify basic information of Client #{uid}
+    p ---------------------------------------------------------------------------
+    form(action='/admin/client_domodify')
+        p name
+            input(type='text' value=client.name name='name')
+        p phone
+            input(type='text' value=client.phone name='phone')
+        p grade
+            input(type='text' value=client.grade name='grade')
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=0)
+        input(type='submit' value='modify')
+    p ---------------------------------------------------------------------------
+    h2 Delete the Client #{uid}
+    form(action='/admin/client_domodify')
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=1)
+        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

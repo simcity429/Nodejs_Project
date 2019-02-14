@@ -1,0 +1,15 @@
+doctype html
+html
+    body
+        p freelancer #{name}
+        p make your team
+        p ------------------------------------------------
+        form(action='/teammake/teammake', method='post')
+            p teamname
+            p
+                input(type='text' name='tname')     
+            p submit
+            p
+            
+                input(type='submit')
+        p ------------------------------------------------

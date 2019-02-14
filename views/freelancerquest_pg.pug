@@ -1,0 +1,128 @@
+extends layout
+
+block content
+    a(href='/freelancerquest' )
+        button(type='button' style = 'margin-right: 10px;') 의뢰 시작시간 순
+    a(href='/freelancerquest/quest_cost')
+        button(type='button' style = 'margin-right: 10px;') 의뢰 금액 순
+    a(href='/freelancerquest/quest_start_cost')
+        button(type='button') 의뢰 시작시간 & 의뢰 금액 순
+    p    
+    h2 전체 의뢰목록
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰자
+            th 의뢰금액
+            th 의뢰시작날짜
+            th 의뢰종료날짜
+            th 의뢰확인
+            th 의뢰신청
+        for mission in missions
+          if (today >= mission.dstartdate && today <= mission.dfinishdate)
+            tr
+                td #{mission.qname}
+                td #{mission.uid}
+                td #{mission.qcost}
+                td #{moment(mission.dstartdate).format('MM/DD/YYYY')}
+                td #{moment(mission.dfinishdate).format('MM/DD/YYYY')}
+                td: a.enter.btn(href='/freelancerquest/quest_information/' + mission.qid) 의뢰확인
+                if mission.on_status == '완료'
+                    td #{mission.on_status}
+                else if mission.on_status == '진행중'
+                    td #{mission.on_status}
+                else if mission.on_status == '신청대기중'
+                    td #{mission.on_status}
+                else
+                  td: a.enter.btn(href='/freelancerquest/quest_participate/' + mission.qid) 의뢰신청
+    p
+    p #{passedVariable}  
+    h2 내가 신청할 수 있는 의뢰목록
+    table(style='width:100%', border='1')
+      tr
+          th 의뢰명
+          th 의뢰자
+          th 의뢰금액
+          th 의뢰시작날짜
+          th 의뢰종료날짜
+          th 의뢰확인
+          th 의뢰신청
+      for mission in missions
+        if (mission.on_status == '지원가능' && today >= mission.dstartdate && today <= mission.dfinishdate && mission.min_freenum == 1 && career >= mission.min_career && python >= mission.python && c >= mission.c && php >= mission.php && java >= mission.java && nodejs >= mission.nodejs)
+          tr
+              td #{mission.qname}
+              td #{mission.uid}
+              td #{mission.qcost}
+              td #{moment(mission.dstartdate).format('MM/DD/YYYY')}
+              td #{moment(mission.dfinishdate).format('MM/DD/YYYY')}
+              td: a.enter.btn(href='/freelancerquest/quest_information/' + mission.qid) 의뢰확인
+              td: a.enter.btn(href='/freelancerquest/quest_participate/' + mission.qid) 의뢰신청
+    p  
+    h2 나의 신청대기중 의뢰목록
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰자
+            th 의뢰금액
+            th 의뢰시작날짜
+            th 의뢰종료날짜
+            th 의뢰확인
+        for mission in missions
+          if mission.on_status == '신청대기중'
+            tr
+                td #{mission.qname}
+                td #{mission.uid}
+                td #{mission.qcost}
+                td #{moment(mission.dstartdate).format('MM/DD/YYYY')}
+                td #{moment(mission.dfinishdate).format('MM/DD/YYYY')}
+                td: a.enter.btn(href='/freelancerquest/quest_information/' + mission.qid) 의뢰확인
+
+    p
+    h2 나의 진행중 의뢰목록
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰자
+            th 의뢰금액
+            th 의뢰시작날짜
+            th 의뢰종료날짜
+            th 완료신청여부
+            th 의뢰확인
+            th 완료신청
+            th 거절메세지
+        for mission in missions2
+          tr
+              td #{mission.qname}
+              td #{mission.uid}
+              td #{mission.qcost}
+              td #{moment(mission.dstartdate).format('MM/DD/YYYY')}
+              td #{moment(mission.dfinishdate).format('MM/DD/YYYY')}
+              td #{mission.on_status}
+              td: a.enter.btn(href='/freelancerquest/quest_information/' + mission.qid) 의뢰확인
+              if mission.on_status != '처리중'
+                  td
+                    form(action='/freelancerquest/quest_approval')
+                      input(type='text' name='resultreport' required)
+                      input(type='hidden' name='qid' value=mission.qid)
+                      input(type='submit') 
+              td #{mission.reject}
+                
+    p
+    p
+    h2 아직 매기지 않은 평점
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰자
+            th 당신의 평점
+            th 의뢰자의 평점
+        for mission in missions3
+            tr
+                td #{mission.qname}
+                td #{mission.uid}
+                td #{mission.participantgrade}
+                td
+                  form(action='/freelancerquest/rating_grade')
+                    input(type='text' name='clientgrade' value=0 required)
+                    input(type='hidden' name='qid' value=mission.qid)
+                    input(type='submit')                

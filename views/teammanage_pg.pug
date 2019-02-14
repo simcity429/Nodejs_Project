@@ -1,0 +1,38 @@
+extends layout
+
+block content
+    h1 Manage page for TEAM #{tname}
+    h2 Add New Member
+    p ---------------------------------------------------------------------------
+    form(action='/teammanage/addmember')
+        p id
+            input(type='text' name='member')
+        input(type='hidden' name='tname' value=tname)
+        input(type='submit' value='add')
+    p ---------------------------------------------------------------------------
+    h2 Team Member List
+    table(style='width:100%' border='1')
+        tr
+            th user ID
+            th career
+            th grade
+            th delete
+        each p in teammember
+            tr
+                th #{p.uid}
+                th #{p.career}
+                th #{p.grade}
+                th
+                    form(action='/teammanage/memberdrop')
+                        input(type='hidden' name='tname' value=tname)
+                        input(type='hidden' name='uid' value=p.uid)
+                        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    h2 Delete the TEAM
+    form(action='/teammanage/delete')
+        input(type='hidden' name='pid' value=pid)
+        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    p Return to the main
+    form(action='/freelancer')
+        input(type='submit' value='return')

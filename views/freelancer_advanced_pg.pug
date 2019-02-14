@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    - var uid = data.uid
+    h1 Advanced manage page for freelancer #{uid}
+    h2 Modify basic information of Freelancer #{uid}
+    p ---------------------------------------------------------------------------
+    form(action='/admin/freelancer_domodify')
+        p name
+            input(type='text' value=data.name name='name')
+        p phone
+            input(type='text' value=data.phone name='phone')
+        p grade
+            input(type='text' value=data.grade name='grade')
+        p age
+            input(type='text' value=data.age name='age')
+        p career
+            input(type='text' value=data.career name='career')
+        p major
+            input(type='text' value=data.major name='major')
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=0)
+        input(type='submit' value='modify')
+    h2 Delete the Freelancer #{uid}
+    p ---------------------------------------------------------------------------
+    form(action='/admin/freelancer_domodify')
+        input(type='hidden' name='uid' value=uid)
+        input(type='hidden' name='delete' value=1)
+        input(type='submit' value='delete')
+    p Return to the admin main
+    p ---------------------------------------------------------------------------
+    form(action='/admin')
+        input(type='submit' value='return')

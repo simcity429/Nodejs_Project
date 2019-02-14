@@ -1,0 +1,75 @@
+extends layout
+
+block content
+ if external && internal
+    p    
+        h2 내부 포트폴리오
+        table(style='width:100%', border='1')
+            tr
+                th 의뢰이름
+                th 의뢰평점
+                th 의뢰시작날짜
+                th 의뢰종료날짜
+            for inter in internal
+                tr 
+                    td #{inter.qname}
+                    td #{inter.grade}
+                    td #{inter.dstartdate}
+                    td #{inter.dfinishdate}
+        p
+        h2 외부 포트폴리오
+        table(style='width:100%', border='1')
+            tr
+                th 의뢰파일명
+                th 개발내용
+                th 다운로드
+            for exter in external
+                tr
+                    td #{exter.filename}
+                    td #{exter.development_info}
+                    td: a.enter.btn(href='/quest_list/get_external_portfolio/' + exter.filename) Down!
+ else if internal
+    p    
+        h2 내부 포트폴리오
+        table(style='width:100%', border='1')
+            tr
+                th 의뢰이름
+                th 의뢰평점
+                th 의뢰시작날짜
+                th 의뢰종료날짜
+            for inter in internal
+                tr 
+                    td #{inter.qname}
+                    td #{inter.grade}
+                    td #{inter.dstartdate}
+                    td #{inter.dfinishdate}
+        p
+        p
+        p
+        h2 외부 포트폴리오는 없습니다!!
+    
+ else if external
+    p    
+        h2 외부 포트폴리오
+        table(style='width:100%', border='1')
+            tr
+                th 의뢰파일명
+                th 개발내용
+                th 다운로드
+            for exter in external
+                tr
+                    td #{exter.filename}
+                    td #{exter.development_info}
+                    td: a.enter.btn(href='/quest_list/get_external_portfolio/' + exter.filename) Down!
+        p
+        p
+        p
+        h2 내부 포트폴리오는 없습니다!!
+ else
+    p    
+        h2 포트폴리오 정보가 없습니다!!
+ p ---------------------------------------------------------------------------
+    p Return to the client main
+        form(action='/go_client')
+            input(type='submit' value='return')    
+    

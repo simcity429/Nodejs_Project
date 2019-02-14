@@ -1,0 +1,24 @@
+doctype html
+html
+    body
+        p welcome, #{name}
+        p You are freelancer
+        p ------------------------------------------------
+        form(action='/freelancermodify_pg')
+          p modify your status
+          p
+            input(type='submit')
+        p
+        p ------------------------------------------------
+        form(action='/freelancerquest')
+          p check Quest on line
+          p
+            input(type='submit')
+        p
+        p ------------------------------------------------
+        form(action='/team_pg')
+          p participate in or build the team.
+          p
+            input(type='submit')
+        p
+        p ------------------------------------------------

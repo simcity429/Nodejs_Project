@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1 Let's sign up as a Client!
+    form(action='/signup', method='post')
+        input(type='hidden' name='usertype' value='client')
+        p ID
+        p
+            input(type='text' name='id' required)
+        p Password
+        p
+            input(type='password' name='pw' required)
+        p Name
+        p
+            input(type='text' name='name' required)
+        p Phone_Number
+        p
+            input(type='text' name='phone_number' required)
+        p
+            input(type='submit')

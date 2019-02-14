@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    h1 Let's sign up as a Freelancer!
+    form(action='/signup', method='post')
+        input(type='hidden' name='usertype' value='freelancer')
+        p ID
+        p
+            input(type='text' name='id' required)
+        p Password
+        p
+            input(type='password' name='pw' required)
+        p Name
+        p
+            input(type='text' name='name' required)
+        p Phone_Number
+        p
+            input(type='text' name='phone_number' required)
+        p Age
+        p
+            input(type='text' name='age' required)
+        p Career
+        p
+            input(type='text' name='career' required)
+        p Major
+        p
+            input(type='text' name='major' required)
+        p Language Proficiency: C, Python, Java, PHP, Nodejs (0~5)
+        p --------------------------------------------------------------
+        p C:  
+            input(type='text' name='c' size=1 required)
+        p Python:  
+            input(type='text' name='python' size=1 required)
+        p Java:  
+            input(type='text' name='java' size=1 required)
+        p PHP:  
+            input(type='text' name='php' size=1 required)
+        p Nodejs:  
+            input(type='text' name='nodejs' size=1 required)
+        p --------------------------------------------------------------
+        p
+            input(type='submit')

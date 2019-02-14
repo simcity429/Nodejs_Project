@@ -1,0 +1,42 @@
+extends layout
+
+block content
+    h2 의뢰 참여자 목록
+    if message == 'have'
+        table(style='width:100%', border='1')
+            tr
+                th 팀/개인
+                th 이름
+                th 프리랜서경력
+                th C_능숙도
+                th JAVA_능숙도
+                th PYTHON_능숙도
+                th Nodejs_능숙도
+                th PHP_능숙도
+                th 평점
+                th 포트폴리오_열람
+                th 의뢰승낙
+                th 의뢰거절
+            for person in people
+                tr
+                    td #{person.t_info}
+                    td #{person.name}
+                    td #{person.career}
+                    td #{person.c}
+                    td #{person.java}
+                    td #{person.python}
+                    td #{person.nodejs}
+                    td #{person.php}
+                    td #{person.grade}
+                    td: a.enter.btn(href='/quest_list/get_portfolio/' + person.uid) 열람 
+                    if person.leading == 'yes'
+                        td: a.enter.btn(href='/quest_list/get_approval/' + person.uid + '/' + qid) 의뢰승낙
+                        td: a.enter.btn(href='/quest_list/get_decline/' + person.uid + '/' + qid) 의뢰거절
+                    else
+                        td 
+    else
+        h3 의뢰에 참여한 사람이 없습니다^^
+    p ---------------------------------------------------------------------------
+        p Return to the client main
+        form(action='/go_client')
+            input(type='submit' value='return')

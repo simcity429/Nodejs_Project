@@ -1,0 +1,41 @@
+extends layout
+
+block content
+    h1 Freelancer Management Page
+    h2 Freelancer List
+    table(style='width:100%', border='1')
+        tr
+            th ID
+            th Name
+            th PhoneNumber
+            th Grade
+            th Age
+            th Career
+            th Major
+            th Python
+            th Java
+            th C
+            th PHP
+            th nodeJS
+            th Advanced
+        each freelancer in data
+            tr
+                th #{freelancer.uid}
+                th #{freelancer.name}
+                th #{freelancer.phone}
+                th #{freelancer.grade}
+                th #{freelancer.age}
+                th #{freelancer.career}
+                th #{freelancer.major}
+                th #{freelancer.python}
+                th #{freelancer.java}
+                th #{freelancer.c}
+                th #{freelancer.php}
+                th #{freelancer.nodejs}
+                th
+                    form(action='/admin/freelancer_advancedmanage' method='get')
+                        input(type='hidden' name='uid' value=freelancer.uid)
+                        input(type='submit' value='Go!')
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

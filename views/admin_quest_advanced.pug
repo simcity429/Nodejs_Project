@@ -1,0 +1,84 @@
+extends layout
+
+block content
+    - var qid = quest.qid
+    h1 Advanced manage page for quest #{qid}
+    h2 Modify basic information of quest #{qid}
+    p #{canbemodify}
+    p ---------------------------------------------------------------------------
+    form(action='/admin/quest_domodify')
+        p uid
+            input(type='text' value=quest.uid name='uid')
+        p qname
+            input(type='text' value=quest.qname name='qname')
+        p qcost
+            input(type='text' value=quest.qcost name='qcost')
+        p dstartdate
+            input(type='text' value=quest.dstartdate name='dstartdate')
+        p dfinishdate
+            input(type='text' value=quest.dfinishdate name='dfinishdate')
+        p min_career
+            input(type='text' value=quest.min_career name='min_career')
+        p min_freenum
+            input(type='text' value=quest.min_freenum name='min_freenum')
+        p max_freenum
+            input(type='text' value=quest.max_freenum name='max_freenum')
+        p python
+            input(type='text' value=quest.python name='python')
+        p java
+            input(type='text' value=quest.java name='java')
+        p c
+            input(type='text' value=quest.c name='c')
+        p php
+            input(type='text' value=quest.php name='php')
+        p nodejs
+            input(type='text' value=quest.nodejs name='nodejs')
+        p pstartdate
+            input(type='text' value=quest.pstartdate name='pstartdate' readonly)
+        p pfinishdate
+            input(type='text' value=quest.pfinishdate name='pfinishdate' readonly)
+        input(type='hidden' name='qid' value=qid)
+        input(type='hidden' name='delete' value=0)
+        input(type='submit' value='modify')
+    p ---------------------------------------------------------------------------
+    h2 Documents
+    table(style='width:100%' border='1')
+        tr
+            th did
+            th qid
+            th filename
+            th download
+            th delete
+        each d in documents
+            tr
+                th #{d.did}
+                th #{d.qid}
+                th #{d.filename}
+                th
+                    form(action='/admin/quest_downDocument' method='get')
+                        input(type='hidden' name='filename' value=d.filename)
+                        input(type='submit' value='download')
+                th
+                    form(action='/admin/quest_dropDocument' method='get')
+                        input(type='hidden' name='canbemodify' value=canbemodify)
+                        input(type='hidden' name='did' value=d.did)
+                        input(type='hidden' name='qid' value=d.qid)
+                        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    h2 Add Document
+    form(action='/admin/document_update' method='post' enctype='multipart/form-data')
+        input(type='hidden' name='canbemodify' value=canbemodify)
+        input(type='hidden' name='qid' value=qid)
+        input(type='file' name='file')
+        p
+            input(type='submit')
+    p ---------------------------------------------------------------------------
+    h2 Delete the Quest #{qid}
+    form(action='/admin/quest_domodify')
+        input(type='hidden' name='qid' value=qid)
+        input(type='hidden' name='delete' value=1)
+        input(type='submit' value='delete')
+    p ---------------------------------------------------------------------------
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

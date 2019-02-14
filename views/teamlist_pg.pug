@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1 This is your teamlist #{uid}
+    h2 Select the team to manage
+    p ---------------------------------------------------------------------------
+    table(style='width:100%' border='1')
+        tr
+            th TeamName
+            th Select
+        each p in teamlist
+            tr
+                th #{p.tname}
+                th
+                    form(action='/teammanage')
+                        input(type='hidden' name='tname' value=p.tname)
+                        input(type='hidden' name='pid' value=p.pid)
+                        input(type='submit' value='SELECT')
+    p ---------------------------------------------------------------------------
+    h2 Build new team
+      form(action='/teammake')
+        input(type='submit' value='BUILD')

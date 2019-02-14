@@ -1,0 +1,83 @@
+extends layout
+
+block content
+    a(href='/quest_list' )
+        button(type='button' style = 'margin-right: 10px;') 의뢰 시작시간 순
+    a(href='/quest_list/quest_cost')
+        button(type='button' style = 'margin-right: 10px;') 의뢰 금액 순
+    a(href='/quest_list/quest_start_cost')
+        button(type='button') 의뢰 시작시간 & 의뢰 금액 순
+    p    
+    h2 나의 전체 의뢰목록
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰금액
+            th 의뢰시작날짜
+            th 의뢰종료날짜
+            th 개발시작날짜
+            th 개발종료날짜
+            th 참여신청자확인
+        for mission in missions
+            tr
+                td #{mission.qname}
+                td #{mission.qcost}
+                td #{mission.dstartdate}
+                td #{mission.dfinishdate}
+                if mission.qstartdate != ""
+                    td #{mission.pstartdate}
+                else
+                    td 미정
+                if mission.qfinishdate != ""
+                    td #{mission.pfinishdate}
+                else
+                    td 미정
+                if mission.status == '진행완료'
+                    td #{mission.status}
+                else if mission.status == '진행중'
+                    td #{mission.status}
+                else
+                    td: a.enter.btn(href='/quest_list/show_participant/' + mission.qid) 참여자확인
+    p
+    h2 진행중 의뢰목록
+    table(style='width:100%', border='1')
+        tr
+            th 의뢰명
+            th 의뢰금액
+            th 의뢰시작날짜
+            th 의뢰종료날짜
+            th 개발시작날짜
+            th 의뢰담당자
+            th 완료신청여부
+        for mission in missions2
+            if mission.accepting == 0
+                tr
+                    td #{mission.qname}
+                    td #{mission.qcost}
+                    td #{mission.dstartdate}
+                    td #{mission.dfinishdate}
+                    td #{mission.pstartdate}
+                    td #{mission.manager}
+                    td: a.enter.btn(href='/quest_list/show_complete_apply/' + mission.qid+ '/' + mission.pid) 완료신청확인
+    p ---------------------------------------------------------------------------
+        p Return to the client main
+        form(action='/go_client')
+            input(type='submit' value='return')
+            
+    //p   person.uid + '/' + qid 
+    //h2 완료 의뢰목록
+    //table
+        tr
+            th 의뢰명
+            th 의뢰시작시간
+            th 의뢰금액
+            th 참여자
+            th 지급평점
+        for mission in missions
+            tr
+                td = mission3
+                td = msssion3
+                td = mission3
+                td = mission3
+                td = mission3
+    

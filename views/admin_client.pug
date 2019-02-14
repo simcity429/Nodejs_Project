@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 Client Management Page
+    h2 Client List
+    table(style='width:100%', border='1')
+        tr
+            th ID
+            th Name
+            th PhoneNumber
+            th Grade
+            th Advanced
+        each client in data
+            tr
+                th #{client.uid}
+                th #{client.name}
+                th #{client.phone}
+                th #{client.grade}
+                th
+                    form(action='/admin/client_advancedmanage' method='get')
+                        input(type='hidden' name='uid' value=client.uid)
+                        input(type='submit' value='Go!')
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

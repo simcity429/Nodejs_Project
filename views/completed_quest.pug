@@ -1,0 +1,24 @@
+extends layout
+
+block content    
+    if message == 'yes'
+        h2 결과보고서 : #{partner_resultreport}
+        p
+        p
+        form(action='/quest_list/accept_complete_quest/' + partner_qid + '/' + partner_pid)
+            p 수락
+            input(type="radio" name="complete_accept" value='1')
+            p 의뢰참여자 평점
+            input(type="text" name="accept_grade")
+            p 거절
+            input(type="radio" name="complete_accept" value='0')
+            p 거절메세지
+            input(type='text' name='reject_message')
+            p
+            input(type='submit' value="return")            
+    else
+        h2 아직 완료 신청을 하지 않았습니다!
+    p ---------------------------------------------------------------------------
+        p Return to the client main
+        form(action='/go_client')
+            input(type='submit' value='return')    

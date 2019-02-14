@@ -1,0 +1,51 @@
+extends layout
+
+block content
+    form(action='/quest_apply', method='post', enctype='multipart/form-data')
+        p 의뢰명
+        p
+            input(type='text' name='qname' required)
+        p 의뢰금액
+        p
+            input(type='text' name='qcost' required)
+        p 의뢰시작날짜
+        p
+            input(type='text' name='dstartdate' required)
+        p 의뢰마감날짜
+        p
+            input(type='text' name='dfinishdate' required)
+        p 최소요구경력 
+        p
+            input(type='text' name='minimumcareer' required)    
+        p 최소프리랜서숫자 
+        p
+            input(type='text' name='min_freenum' required)    
+        p 최대프리랜서숫자
+        p
+            input(type='text' name='max_freenum' required)    
+        p
+        h3 의뢰상 언어 요구수준
+        p C 요구수준
+        p
+            input(type='text' name='c_pro' required)    
+        p
+        p Python 요구수준
+        p
+            input(type='text' name='python_pro' required)    
+        p
+        p Java 요구수준
+        p
+            input(type='text' name='java_pro' required)    
+        p
+        p Nodejs 요구수준
+        p
+            input(type='text' name='nodejs_pro' required)    
+        p
+        p PHP 요구수준
+        p
+            input(type='text' name='php_pro' required)    
+        p
+        p 의뢰문서
+            input(type='file', name='quest_document' multiple) 
+        p
+            input(type='submit')

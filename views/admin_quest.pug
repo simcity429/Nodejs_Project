@@ -1,0 +1,60 @@
+extends layout
+
+block content
+    h1 Quest Management Page
+    h2 Quest List
+    table(style='width:100%', border='1')
+        tr
+            th QuestID
+            th ClientID
+            th QuestName
+            th Cost
+            th Startdate
+            th Finishdate
+            th Min_Career
+            th Min_Num
+            th Max_Num
+            th Python
+            th Java
+            th C
+            th PHP
+            th nodeJS
+            th Advanced
+        each quest in data
+            tr
+                th #{quest.qid}
+                th #{quest.uid}
+                th #{quest.qname}
+                th #{quest.qcost}
+                th #{quest.dstartdate}
+                th #{quest.dfinishdate}
+                th #{quest.min_career}
+                th #{quest.min_freenum}
+                th #{quest.max_freenum}
+                th #{quest.python}
+                th #{quest.java}
+                th #{quest.c}
+                th #{quest.php}
+                th #{quest.nodejs}
+                th
+                    form(action='/admin/quest_advancedmanage' method='get')
+                        input(type='hidden' name='qid' value=quest.qid)
+                        input(type='submit' value='Go!')
+    h2 Rejected Quest
+    table(style='width:100%' border='1')
+        tr
+            th qid
+            th reject message
+            th delete
+            each r in reject
+                if (r.reject)
+                    tr
+                        th #{r.qid}
+                        th #{r.reject}
+                        th
+                            form(action='/admin/reject_delete' method='get')
+                                input(type='hidden' name='qid' value=r.qid)
+                                input(type='submit' value='delete')
+    p Return to the admin main
+    form(action='/admin')
+        input(type='submit' value='return')

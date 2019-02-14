@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  ul
+    each obj in data
+      p ------------------------------
+      -var tmpVar = ""
+      each a in obj
+        if a
+          - tmpVar = tmpVar + " " + a
+      li=tmpVar
+      

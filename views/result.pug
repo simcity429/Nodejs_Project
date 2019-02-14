@@ -1,0 +1,16 @@
+doctype html
+html
+    body
+        p hello #{name}
+         if usertype == 0
+            p you are admin
+         else
+            p you are normal member
+        form(action='/sessionTest')
+            p next_page
+            p
+                input(type='submit')
+        form(action='/logout')
+            p log_out
+            p
+                input(type='submit')
